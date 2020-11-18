@@ -6,7 +6,7 @@ class Sb3XmlError extends Error {};
 
 // parse a block
 function parseBlock(node) {
-  if (node.text) return false;
+  if (node.text || node.comment) return false;
   return {
     block: node.name,
     children: node.children.map(parseBlock).filter(d=>d),
@@ -29,7 +29,7 @@ function parseProc(node) {
 
 // parse any node in the procedures node
 function parseProcedure(node) {
-  if (node.text) return false;
+  if (node.text || node.comment) return false;
   const name = node.name.trim();
   if (name === 'proc') return parseProc(node);
   throw new Sb3XmlError(`Unknown procedures node ${node.name}`)
@@ -56,7 +56,7 @@ function parseVar(type, node) {
 
 // parse a var or list node
 function parseVariable(node) {
-  if (node.text) return false;
+  if (node.text || node.comment) return false;
   const name = node.name.trim();
   if (name === 'var') return parseVar('var', node);
   if (name === 'list') return parseVar('list', node);
@@ -74,7 +74,7 @@ function parseVariables(node) {
 // assets
   // parse an asset node
   function parseAsset(node) {
-    if (node.text) return false;
+    if (node.text || node.comment) return false;
     const name = node.name.trim();
     if (name === 'asset') {
       const symbol = node.attr.symbol;
@@ -109,7 +109,7 @@ function parseBlocks(node) {
 
 // parse top level nodes
 function parseTopLevel(node) {
-  if (node.text) return false;
+  if (node.text || node.comment) return false;
   const name = node.name.trim();
   if (name === 'procedures') return parseProcedures(node);
   if (name === 'variables') return parseVariables(node);
