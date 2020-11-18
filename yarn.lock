@@ -268,7 +268,7 @@ sax@^1.2.1:
 
 sb3@ajzat34/sb3:
   version "1.0.0"
-  resolved "https://codeload.github.com/ajzat34/sb3/tar.gz/13e968e5df156603da8b1d20cbb0d25c539575a8"
+  resolved "https://codeload.github.com/ajzat34/sb3/tar.gz/76271e1d59b322e8f34f5536fa51ac77cd5b6c4a"
   dependencies:
     inquirer "^7.3.3"
     jszip "^3.5.0"

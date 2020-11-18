@@ -1,8 +1,8 @@
 const xmldoc = require('xmldoc');
 
-const options = {};
+const Sb3XmlError = require('./error');
 
-class Sb3XmlError extends Error {};
+const options = {};
 
 // parse a block
 function parseBlock(node) {
@@ -11,7 +11,8 @@ function parseBlock(node) {
     block: node.name,
     children: node.children.map(parseBlock).filter(d=>d),
     attr: node.attr,
-  }
+    line: node.line+1,
+  };
 }
 
 // parse a proc

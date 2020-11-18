@@ -2,8 +2,11 @@ const boolean = require('./boolean');
 const assert = require('assert').strict;
 const Sb3 = require('sb3');
 
+const Sb3XmlError = require('./error');
+class LinkerError extends Sb3XmlError {};
+
 function getSymbol(project, name) {
-  if (!project.symbols.has(name)) throw new Error(`Symbol: ${name} is not defined`);
+  if (!project.symbols.has(name)) throw new LinkerError(`symbol: ${name} is not defined`);
   return project.symbols.get(name);
 }
 
@@ -12,11 +15,15 @@ function isBoolean(data) {
 }
 
 function assertBlock(data, opcode, name) {
-  assert(data instanceof Sb3.Block, `${opcode}: "${name}" must be a block`);
+  assert(data instanceof Sb3.Block, `malformed ${opcode}: "${name}" must be a block`);
 }
 
 function assertBranch(data, opcode, name) {
-  assert(data instanceof Sb3.Branch, `${opcode}: "${name}" must be a branch`);
+  assert(data instanceof Sb3.Branch, `malformed ${opcode}: "${name}" must be a branch`);
+}
+
+function assertProcedure(data, opcode, name) {
+  assert(data instanceof Sb3.Branch.Procedure, `malformed ${opcode}: "${name}" must be a procedure`);
 }
 
 module.exports = {
@@ -26,6 +33,7 @@ module.exports = {
   const block = o.block;
   const project = o.project
   const proc = getSymbol(project, block.attr.symbol);
+  assertProcedure(proc, 'call', 'symbol');
   return ctx.callProcedure(proc);
 },
 

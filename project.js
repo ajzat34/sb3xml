@@ -1,5 +1,7 @@
 const Sb3 = require('sb3');
 
+const Sb3XmlError = require('./error');
+
 const parse = require('./parse');
 const alias = require('./alias');
 const generators = require('./generators');
@@ -59,11 +61,17 @@ class Project {
       ctx,
     };
 
-    if (generators.hasOwnProperty(opcode)) {
-      return generators[opcode](o);
-    } else {
-      return generators['SB3XML.GENERIC'](o);
+    try {
+      if (generators.hasOwnProperty(opcode)) {
+        return generators[opcode](o);
+      } else {
+        return generators['SB3XML.GENERIC'](o);
+      }
+    } catch (err) {
+      err.line = data.line;
+      throw err;
     }
+
   }
 
   #fill_procedures(arr) {
@@ -82,9 +90,9 @@ class Project {
     }
   }
 
-  xml(xmlstring) {
+  xml(xmlstring, filename = 'XMLString') {
     const data = parse(xmlstring);
-    this.files.push(data);
+    this.files.push({data,filename});
     // define symbols
     this.#variables(data.variables);
     this.#assets(data.assets);
@@ -93,9 +101,14 @@ class Project {
 
   export(file) {
     this.project.main.block('event.whenflagclicked');
-    for (const data of this.files) {
-      this.#fill_procedures(data.procedures);
-      this.#blocks(data.blocks);
+    for (const file of this.files) {
+      try {
+        this.#fill_procedures(file.data.procedures);
+        this.#blocks(file.data.blocks);
+      } catch (err) {
+        err.file = file.filename;
+        throw err;
+      }
     }
     this.project.export(file)
   }
