@@ -9,24 +9,15 @@ function resolve(name) {
   else return name;
 }
 
-function uuid(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-}
-
 class Project {
   symbols = new Map();
   project = new Sb3();
+  files = [];
 
   #variables(arr) {
     for (const variable of arr) {
       if (this.symbols.has(variable.symbol)) throw new Error(`Symbol: ${variable.symbol} already defined`);
-      this.symbols.set(variable.symbol, this.project.main.variable(variable.name + '.' + uuid(16)));
+      this.symbols.set(variable.symbol, this.project.main.variable(variable.name));
     }
   }
 
@@ -39,7 +30,7 @@ class Project {
   #procedures(arr) {
     for (const procedure of arr) {
       if (this.symbols.has(procedure.symbol)) throw new Error(`Symbol: ${procedure.symbol} already defined`);
-      const def = this.project.main.procedure(procedure.name + '.' + uuid(16), procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
+      const def = this.project.main.procedure(procedure.name, procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
       this.symbols.set(procedure.symbol, def);
     }
   }
@@ -86,7 +77,6 @@ class Project {
   }
 
   #blocks(arr) {
-    this.project.main.block('event.whenflagclicked');
     for (const block of arr) {
       this.#block(block, this.project.main);
     };
@@ -94,17 +84,19 @@ class Project {
 
   xml(xmlstring) {
     const data = parse(xmlstring);
-    // console.log(data);
+    this.files.push(data);
+    // define symbols
     this.#variables(data.variables);
     this.#assets(data.assets);
     this.#procedures(data.procedures);
-    this.#fill_procedures(data.procedures);
-    this.#blocks(data.blocks);
-
-    console.log(this.symbols)
   }
 
   export(file) {
+    this.project.main.block('event.whenflagclicked');
+    for (const data of this.files) {
+      this.#fill_procedures(data.procedures);
+      this.#blocks(data.blocks);
+    }
     this.project.export(file)
   }
 }
