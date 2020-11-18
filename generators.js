@@ -14,10 +14,7 @@ module.exports = {
 },
 
 'SB3XML.internal.literal': function(o) {
-  const ctx = o.ctx;
-  const block = o.block;
-  const project = o.project
-  const value = block.attr.value;
+  const value = o.block.attr.value;
   if (isNaN(value)) {
     return parseFloat(value);
   } else {
@@ -27,26 +24,18 @@ module.exports = {
 
 'SB3XML.internal.branch': function(o) {
   const ctx = o.ctx;
-  const block = o.block;
-  const project = o.project;
   const branch = ctx.branch(_ctx=>o.evalParams(_ctx));
   return branch;
 },
 
 'control.if': function(o) {
-  const ctx = o.ctx;
-  const block = o.block;
-  const project = o.project;
-  const nodes = o.evalParams(ctx);
-  return ctx.block('control.if', nodes[1], nodes[0]);
+  const nodes = o.evalParams(o.ctx);
+  return o.ctx.block('control.if', nodes[1], nodes[0]);
 },
 
 'control.if_else': function(o) {
-  const ctx = o.ctx;
-  const block = o.block;
-  const project = o.project;
-  const nodes = o.evalParams(ctx);
-  return ctx.block('control.if_else', nodes[2], nodes[0], nodes[1]);
+  const nodes = o.evalParams(o.ctx);
+  return o.ctx.block('control.if_else', nodes[2], nodes[0], nodes[1]);
 },
 
 'SB3XML.internal.variable': function(o) {
