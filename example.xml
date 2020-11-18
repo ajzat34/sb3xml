@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sb3xml>
+<sb3>
+  all text in the sb3 node is ignored, text can be used for comments
+
+  there are four main nodes to use:
+    - variables
+    - assets
+    - procedures
+    - blocks
+
+  there can be any number of each, in any order
+
+  declare sprite variables
+  <variables>
+    <var symbol="stackptr"/>
+    <list symbol="memory"/>
+  </variables>
+
+  declare sprite assets
+  assets are costumes sounds ect...
+  <assets>
+    <asset symbol="costume" file="costume.png"/>
+  </assets>
+
+  declare procedures
+  <procedures>
+
+    a basic procedure definition
+    <proc symbol="_main" name="Main" warp="false">
+
+      a goto block
+      <goto>
+        x: <literal value="10"/>
+        y: <literal value="20"/>
+      </goto>
+
+      <reset-timer/>
+
+      an if statement
+      <if>
+        condition:
+          <eq><literal value="10"/><literal value="10"/></eq>
+        branch:
+          <branch>
+            <goto>
+              x=<literal value="10"/> y=<literal value="20"/>
+            </goto>
+          </branch>
+      </if>
+
+    </proc>
+
+  </procedures>
+
+  <blocks>
+    <goto>
+      x: <literal value="10"/>
+      y: <literal value="20"/>
+    </goto>
+    <call symbol="_main"/>
+  </blocks>
+</sb3>

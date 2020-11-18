@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "sb3": "ajzat34/sb3",
+    "xmldoc": "^1.1.2"
+  }
+}
