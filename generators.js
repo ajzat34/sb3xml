@@ -75,6 +75,19 @@ module.exports = {
   return o.ctx.block('control.repeat_until', nodes[1], nodes[0]);
 },
 
+'control.repeat': function(o) {
+  const nodes = o.evalParams(o.ctx);
+  assertBlock(nodes[0], 'repeat', 'times');
+  assertBranch(nodes[1], 'repeat', 'branch');
+  return o.ctx.block('control.repeat', nodes[1], nodes[0]);
+},
+
+'control.forever': function(o) {
+  const nodes = o.evalParams(o.ctx);
+  assertBranch(nodes[0], 'repeat', 'branch');
+  return o.ctx.block('control.forever', nodes[0]);
+},
+
 'SB3XML.GENERIC': function(o) {
   const ctx = o.ctx;
   const opcode = o.opcode;
