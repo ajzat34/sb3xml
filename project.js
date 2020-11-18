@@ -32,7 +32,7 @@ class Project {
 
   #assets(arr) {
     for (const asset of arr) {
-      console.log('ignoring asset', asset);
+      this.project.sprite.asset(asset.file, asset.name);
     }
   }
 

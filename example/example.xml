@@ -20,7 +20,7 @@
   declare sprite assets
   assets are costumes sounds ect...
   <assets>
-    <asset symbol="costume" file="costume.png"/>
+    <asset symbol="costume" file="./example/costume.png"/>
   </assets>
 
   declare procedures
