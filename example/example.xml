@@ -3,7 +3,7 @@
 <sb3>
   <!--
     all text in the sb3 node is ignored,
-    so text can be used for readable inline comments/documentation
+    so text can be used for inline comments/documentation
     the standard for this is paramater_name: node
 
     there are four main nodes to use:
