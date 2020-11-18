@@ -79,7 +79,7 @@ class Project {
   #blocks(arr) {
     for (const block of arr) {
       this.#block(block, this.project.main);
-    };
+    }
   }
 
   xml(xmlstring) {

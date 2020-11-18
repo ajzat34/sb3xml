@@ -1,6 +1,22 @@
+const boolean = require('./boolean');
+const assert = require('assert').strict;
+const Sb3 = require('sb3');
+
 function getSymbol(project, name) {
   if (!project.symbols.has(name)) throw new Error(`Symbol: ${name} is not defined`);
   return project.symbols.get(name);
+}
+
+function isBoolean(data) {
+  return boolean.includes(data.template.fullname);
+}
+
+function assertBlock(data, opcode, name) {
+  assert(data instanceof Sb3.Block, `${opcode}: "${name}" must be a block`);
+}
+
+function assertBranch(data, opcode, name) {
+  assert(data instanceof Sb3.Branch, `${opcode}: "${name}" must be a branch`);
 }
 
 module.exports = {
@@ -30,18 +46,33 @@ module.exports = {
 
 'control.if': function(o) {
   const nodes = o.evalParams(o.ctx);
+  assertBlock(nodes[0], 'if', 'condition');
+  if (!isBoolean(nodes[0])) throw new Error('If statement condition is not a boolean');
+  assertBranch(nodes[1], 'if', 'branch');
   return o.ctx.block('control.if', nodes[1], nodes[0]);
 },
 
 'control.if_else': function(o) {
   const nodes = o.evalParams(o.ctx);
-  return o.ctx.block('control.if_else', nodes[2], nodes[0], nodes[1]);
+  assertBlock(nodes[0], 'ifelse', 'condition');
+  if (!isBoolean(nodes[0])) throw new Error('If statement condition is not a boolean');
+  assertBranch(nodes[1], 'ifelse', 'branch:if');
+  assertBranch(nodes[2], 'ifelse', 'branch:else');
+  return o.ctx.block('control.if_else', nodes[1], nodes[2], nodes[0]);
 },
 
 'SB3XML.internal.variable': function(o) {
   const block = o.block;
   const project = o.project;
   return getSymbol(project, block.attr.symbol);
+},
+
+'control.repeat_until': function(o) {
+  const nodes = o.evalParams(o.ctx);
+  assertBlock(nodes[0], 'repeat_until', 'condition');
+  if (!isBoolean(nodes[0])) throw new Error('repeat_until statement condition is not a boolean');
+  assertBranch(nodes[1], 'repeat_until', 'branch');
+  return o.ctx.block('control.repeat_until', nodes[1], nodes[0]);
 },
 
 'SB3XML.GENERIC': function(o) {
