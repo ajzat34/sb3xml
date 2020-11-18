@@ -32,9 +32,9 @@ module.exports = {
 'SB3XML.internal.literal': function(o) {
   const value = o.block.attr.value;
   if (isNaN(value)) {
-    return parseFloat(value);
-  } else {
     return value;
+  } else {
+    return parseFloat(value);
   }
 },
 

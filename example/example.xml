@@ -31,14 +31,17 @@
 
     <!-- a basic procedure definition -->
     <proc symbol="_main" name="Main" warp="false">
-      <goto> x: <literal value="10"/> y: <literal value="20"/> </goto> <!-- create a block -->
       <reset-timer/> <!-- create another block -->
+      <ask> <literal value="Enter if statement? (Y/n)"/> </ask>
       <if> <!-- an if statement -->
-        condition: <eq><literal value="10"/><literal value="10"/></eq>
+        condition:
+          <eq><answer/><literal value="y"/></eq>
+          
         branch:
           <branch> <!-- an execution branch -->
             <goto> x: <literal value="10"/> y: <literal value="20"/> </goto>
           </branch>
+
       </if>
     </proc>
 
