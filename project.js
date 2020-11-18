@@ -16,6 +16,10 @@ class Project {
   project = new Sb3();
   files = [];
 
+  constructor() {
+    this.project.main.block('event.whenflagclicked');
+  }
+
   #variables(arr) {
     for (const variable of arr) {
       if (this.symbols.has(variable.symbol)) throw new Error(`Symbol: ${variable.symbol} already defined`);
@@ -100,7 +104,6 @@ class Project {
   }
 
   export(file) {
-    this.project.main.block('event.whenflagclicked');
     for (const file of this.files) {
       try {
         this.#fill_procedures(file.data.procedures);

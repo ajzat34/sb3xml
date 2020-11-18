@@ -78,14 +78,12 @@ function parseVariables(node) {
     if (node.text || node.comment) return false;
     const name = node.name.trim();
     if (name === 'asset') {
-      const symbol = node.attr.symbol;
-      if (!symbol) throw new Sb3XmlError(`asset node must select a symbol`);
-      const name = node.attr.name || symbol;
+      const name = node.attr.name;
+      if (!name) throw new Sb3XmlError(`asset node must select a aname`);
       const file = node.attr.file;
       if (!file) throw new Sb3XmlError(`asset node must select a file`);
       return {
         type: 'asset',
-        symbol,
         name,
         file,
       }

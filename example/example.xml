@@ -23,7 +23,7 @@
 
   <!-- declare sprite assets (assets are costumes sounds ect...) -->
   <assets>
-    <asset symbol="costume" file="./example/costume.png"/>
+    <asset name="costume" file="./example/costume.png"/>
   </assets>
 
   <!-- declare procedures -->
@@ -41,6 +41,7 @@
         branch:
           <branch> <!-- an execution branch -->
             <goto> x: <literal value="100"/> y: <literal value="50"/> </goto>
+            <looks.switchcostumeto> <literal value="costume"/> </looks.switchcostumeto>
           </branch>
 
       </if>

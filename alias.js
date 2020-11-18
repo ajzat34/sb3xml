@@ -11,7 +11,7 @@ module.exports = {
   // looks
   say: 'looks.say',
   think: 'looks.think',
-  'set-costume': 'looks.costumenumbername',
+  'set-costume': 'looks.switchcostumeto',
   costume: 'looks.costume',
   'set-size': 'looks.setsizeto',
   show: 'looks.show',
