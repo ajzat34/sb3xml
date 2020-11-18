@@ -2,5 +2,12 @@
   "dependencies": {
     "sb3": "ajzat34/sb3",
     "xmldoc": "^1.1.2"
-  }
+  },
+  "name": "Sb3Xml",
+  "version": "1.0.0",
+  "description": "Convert XML documents to Sb3 projects",
+  "main": "index.js",
+  "repository": "https://github.com/ajzat34/Sb3Xml.git",
+  "author": "Andrew Johnson <ajzat25@gmail.com>",
+  "license": "MIT"
 }
