@@ -6,7 +6,15 @@ Convert XML documents to SB3 projects
 const fs = require('fs');
 const Project = require('sb3xml');
 
-const translationUnit = new Project();
-translationUnit.file(fs.readFileSync('main.xml'), 'Main');
-translationUnit.export(__dirname + 'out.sb3');
+// create a program
+const unit = new Project();
+
+// load a file
+unit.file(fs.readFileSync('main.xml'), 'Main');
+
+// export the sb3
+unit.export(__dirname + 'out.sb3');
+
+// print a representation of the program
+console.log(unit.render());
 ```
