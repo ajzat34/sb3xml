@@ -76,7 +76,7 @@ module.exports = {
   if (!isBoolean(nodes[0])) throw new Error('If statement condition is not a boolean');
   assertBranch(nodes[1], 'ifelse', 'branch:if');
   assertBranch(nodes[2], 'ifelse', 'branch:else');
-  return o.ctx.block('control.if_else', nodes[1], nodes[2], nodes[0]);
+  return o.ctx.block('control.if_else', nodes[1], nodes[0], nodes[2]);
 },
 
 'SB3XML.internal.variable': function(o) {
@@ -88,22 +88,35 @@ module.exports = {
 'control.repeat_until': function(o) {
   const nodes = o.evalParams(o.ctx);
   assertBlock(nodes[0], 'repeat_until', 'condition');
-  if (!isBoolean(nodes[0])) throw new Error('repeat_until statement condition is not a boolean');
+  if (!isBoolean(nodes[0])) throw new Sb3XmlError('repeat_until statement condition is not a boolean');
   assertBranch(nodes[1], 'repeat_until', 'branch');
   return o.ctx.block('control.repeat_until', nodes[1], nodes[0]);
 },
 
 'control.repeat': function(o) {
   const nodes = o.evalParams(o.ctx);
-  assertBlock(nodes[0], 'repeat', 'times');
   assertBranch(nodes[1], 'repeat', 'branch');
-  return o.ctx.block('control.repeat', nodes[1], nodes[0]);
+  return o.ctx.block('control.repeat', nodes[0], nodes[1]);
 },
 
 'control.forever': function(o) {
   const nodes = o.evalParams(o.ctx);
   assertBranch(nodes[0], 'repeat', 'branch');
   return o.ctx.block('control.forever', nodes[0]);
+},
+
+'SB3XML.internal.stop.all': function(o) {
+  const ctx = o.ctx;
+  const block = ctx.blocks.get('control.stop').instance('all', 'mutation', [], 'false');
+  return ctx.push(block);
+},
+
+'operator.mathop': function(o) {
+  const ctx = o.ctx;
+  const nodes = o.evalParams();
+  if (!(['abs','floor','ceiling','sqrt','sin','cos','tan','asin','acos','atan','ln','log','e^','10^'].includes(o.block.attr.op)))
+    throw new Sb3XmlError(`value ${o.block.attr.op} for op in op is invalid`);
+  return ctx.block('operator.mathop', o.block.attr.op, nodes[0]);
 },
 
 'SB3XML.GENERIC': function(o) {

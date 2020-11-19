@@ -26,7 +26,6 @@ module.exports = {
   ifelse: 'control.if_else',
   'sleep-until': 'control.wait_until',
   until: 'control.repeat_until',
-  stop: 'control.stop',
 
   // sensing
   ask: 'sensing.askandwait',
@@ -63,7 +62,7 @@ module.exports = {
   incr: 'data.changevariableby',
   'var-show': 'data.showvariable',
   'var-hide': 'data.hidevariable',
-  'list-append': 'data.addtolist',
+  'list-push': 'data.addtolist',
   'list-remove': 'data.deleteoflist',
   'list-clear': 'data.deletealloflist',
   'list-insert': 'data.insertatlist',
@@ -83,6 +82,10 @@ module.exports = {
   'pen-size': 'pen.setPenSizeTo',
   'pen-color': 'pen.setPenColorParamTo',
 
+  // speical
+  'stop-all': 'SB3XML.internal.stop.all',
+  'stop-this': 'SB3XML.internal.stop.this',
+
   // internal
   string: 'SB3XML.internal.string',
   number: 'SB3XML.internal.number',
@@ -92,5 +95,4 @@ module.exports = {
   var: 'SB3XML.internal.variable',
   call: 'SB3XML.internal.call',
   branch: 'SB3XML.internal.branch',
-  debug: 'SB3XML.internal.debug',
 }

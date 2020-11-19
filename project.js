@@ -20,6 +20,10 @@ class Project {
   project = new Sb3();
   files = [];
 
+  var = [];
+  list = [];
+  asset = [];
+
   /**
   * @constructor
   */
@@ -30,19 +34,29 @@ class Project {
   #variables(arr) {
     for (const variable of arr) {
       if (this.symbols.has(variable.symbol)) throw new Error(`Symbol: ${variable.symbol} already defined`);
-      this.symbols.set(variable.symbol, this.project.main.variable(variable.name));
+      if (variable.type === 'var') {
+        this.symbols.set(variable.symbol, this.project.main.variable(variable.name));
+        this.var.push(variable.symbol);
+      } else if (variable.type === 'list') {
+        this.symbols.set(variable.symbol, this.project.main.list(variable.name));
+        this.list.push(variable.symbol);
+      }
+      else throw new Error(`Unknown variable type ${variable.type}`);
     }
   }
 
   #assets(arr) {
     for (const asset of arr) {
       this.project.sprite.asset(asset.file, asset.name);
+      this.asset.push(asset.name);
     }
   }
 
   #procedures(arr) {
     for (const procedure of arr) {
-      if (this.symbols.has(procedure.symbol)) throw new Error(`Symbol: ${procedure.symbol} already defined`);
+      if (this.symbols.has(procedure.symbol)) {
+        if (!(this.symbols.get(procedure.symbol) instanceof Sb3.Block)) throw new Error(`Symbol: ${procedure.symbol} already defined as non-procedure`);
+      }
       const def = this.project.main.procedure(procedure.name, procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
       this.symbols.set(procedure.symbol, def);
     }
@@ -123,8 +137,10 @@ class Project {
   #fill_procedures(arr) {
     for (const procedure of arr) {
       const proc = this.symbols.get(procedure.symbol);
+      if (proc.used) throw new Error(`Redefinition of procedure: ${procedure.symbol}`);
       const ctx = proc.branch;
       for (const block of procedure.blocks) {
+        proc.done = true;
         this.#block(block, ctx);
       }
     }
@@ -188,6 +204,10 @@ class Project {
 
   render() {
     let data = '';
+    for (const v of this.var) data += `var ${v}\n`;
+    for (const v of this.list) data += `list ${v}\n`;
+    for (const v of this.asset) data += `asset ${v}\n`;
+    data += '\n'
     for (const file of this.files) {
       data += `#file ${file.filename}:\n`;
       data += this.#render_procedures(file.data.procedures);
