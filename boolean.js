@@ -5,4 +5,8 @@ module.exports = [
   'operator.and',
   'operator.or',
   'operator.not',
+  'list-contains',
+  'sensing.keypressed',
+  'sensing.mousedown',
+  'operator.contains',
 ]
