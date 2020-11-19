@@ -92,4 +92,5 @@ module.exports = {
   var: 'SB3XML.internal.variable',
   call: 'SB3XML.internal.call',
   branch: 'SB3XML.internal.branch',
+  debug: 'SB3XML.internal.debug',
 }

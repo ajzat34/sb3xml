@@ -34,6 +34,12 @@ module.exports = {
   return `${parseFloat(value)}`;
 },
 
+'SB3XML.internal.variable': function(o) {
+  const opcode = o.opcode;
+  const block = o.block;
+  return `var:${block.attr.symbol}`
+},
+
 'SB3XML.GENERIC': function(o) {
   const opcode = o.opcode;
   const block = o.block;

@@ -115,4 +115,8 @@ module.exports = {
   return ctx.block(opcode, ...o.evalParams());
 },
 
+'SB3XML.internal.debug': function(o) {
+  return {};
+}
+
 }
