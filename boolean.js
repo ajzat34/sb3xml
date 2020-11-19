@@ -9,4 +9,5 @@ module.exports = [
   'sensing.keypressed',
   'sensing.mousedown',
   'operator.contains',
+  'data.listcontainsitem',
 ]
