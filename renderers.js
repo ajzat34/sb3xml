@@ -5,7 +5,7 @@ module.exports = {
 'SB3XML.internal.call': function(o) {
   const opcode = o.opcode;
   const block = o.block;
-  return `call ${block.attr.symbol}`
+  return `${block.attr.symbol}()`
 },
 
 'SB3XML.internal.branch': function(o) {
@@ -37,14 +37,14 @@ module.exports = {
 'SB3XML.GENERIC': function(o) {
   const opcode = o.opcode;
   const block = o.block;
-  const args = o.evalParams().join(' ');
+  const args = o.evalParams().join(', ');
   let open = ''
   let close = ''
   if (boolean.includes(opcode)) {
     open = '<';
     close = '>';
   }
-  return `${open}${opcode}${args? ' '+args:''}${close}`;
+  return `${open}${opcode}(${args})${close}`;
 },
 
 }

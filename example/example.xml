@@ -17,8 +17,7 @@
 
   <!-- declare sprite variables -->
   <variables>
-    <var symbol="stackptr"/>
-    <list symbol="memory"/>
+    <var symbol="a"/>
   </variables>
 
   <!-- declare sprite assets (assets are costumes sounds ect...) -->
@@ -31,9 +30,13 @@
 
     <!-- a basic procedure definition -->
     <proc symbol="_main" name="Main" warp="false">
+      <!-- show the variable a -->
+      <var-show><var symbol="a"/></var-show>
       <!-- <literal> automaticly guesses the type, you should probably use <number>(<n>) or <string>(<s>) -->
       <goto> x: <literal value="0"/> y: <number value="0"/> </goto>
       <reset-timer/> <!-- create another block -->
+      <ask> <string value="Value for a?"/> </ask>
+      <set><var symbol="a"/><answer/></set>
       <ask> <string value="Enter if statement? (Y/n)"/> </ask>
       <if> <!-- an if statement -->
         condition:
@@ -41,7 +44,7 @@
 
         branch:
           <branch> <!-- an execution branch -->
-            <goto> x: <n value="100"/> y: <n value="50"/> </goto>
+            <goto> x: <add><n value="100"/><var symbol="a"/></add> y: <n value="50"/> </goto>
             <looks.switchcostumeto> <s value="costume"/> </looks.switchcostumeto>
           </branch>
 
@@ -54,6 +57,6 @@
   <blocks>
     <call symbol="_main"/>
     <!-- create a second main branch with a whengreenflagclicked start -->
-    <branch><event.whenflagclicked/></branch>
+    <!-- <branch><event.whenflagclicked/></branch> -->
   </blocks>
 </sb3>

@@ -140,7 +140,7 @@ class Project {
     let data = '';
     for (const procedure of arr) {
       const proc = this.symbols.get(procedure.symbol);
-      data += `[procedure ${procedure.symbol}]: {\n`
+      data += `define ${procedure.symbol}() {\n`
       for (const block of procedure.blocks) {
         data += '\t' + this.#render_block(block, 1) + '\n';
       }
@@ -193,7 +193,7 @@ class Project {
       data += this.#render_procedures(file.data.procedures);
       data += this.#render(file.data.blocks);
     }
-    return data;
+    return data.trim();
   }
 
   /**
