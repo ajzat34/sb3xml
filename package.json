@@ -1,6 +1,6 @@
 {
   "name": "sb3xml",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "dependencies": {
     "sb3": "ajzat34/sb3",
     "xmldoc": "^1.1.2"
