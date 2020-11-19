@@ -52,5 +52,7 @@
   <!-- top level blocks under a green flag block -->
   <blocks>
     <call symbol="_main"/>
+    <!-- create a second main branch with a whengreenflagclicked start -->
+    <branch><event.whenflagclicked/></branch>
   </blocks>
 </sb3>
