@@ -11,11 +11,17 @@ function resolve(name) {
   else return name;
 }
 
+/**
+* Main class
+*/
 class Project {
   symbols = new Map();
   project = new Sb3();
   files = [];
 
+  /**
+  * @constructor
+  */
   constructor() {
     this.project.main.block('event.whenflagclicked');
   }
@@ -94,7 +100,12 @@ class Project {
     }
   }
 
-  xml(xmlstring, filename = 'XMLString') {
+  /**
+  * feed xml data into the project
+  * @param {string} xmlstring
+  * @param {string | undefined} filename defaults to XMLString
+  */
+  file(xmlstring, filename = 'XMLString') {
     const data = parse(xmlstring);
     this.files.push({data,filename});
     // define symbols
@@ -103,6 +114,10 @@ class Project {
     this.#procedures(data.procedures);
   }
 
+  /**
+  * export an sb3 file
+  * @param {string} file file to write
+  */
   export(file) {
     for (const file of this.files) {
       try {
