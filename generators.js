@@ -46,6 +46,16 @@ module.exports = {
   }
 },
 
+'SB3XML.internal.string': function(o) {
+  const value = o.block.attr.value;
+  return value;
+},
+
+'SB3XML.internal.number': function(o) {
+  const value = o.block.attr.value;
+  return parseFloat(value);
+},
+
 'SB3XML.internal.branch': function(o) {
   const ctx = o.ctx;
   const branch = ctx.branch(_ctx=>o.evalParams(_ctx));

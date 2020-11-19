@@ -31,17 +31,18 @@
 
     <!-- a basic procedure definition -->
     <proc symbol="_main" name="Main" warp="false">
-      <goto> x: <literal value="0"/> y: <literal value="0"/> </goto>
+      <!-- <literal> automaticly guesses the type, you should probably use <number>(<n>) or <string>(<s>) -->
+      <goto> x: <literal value="0"/> y: <number value="0"/> </goto>
       <reset-timer/> <!-- create another block -->
-      <ask> <literal value="Enter if statement? (Y/n)"/> </ask>
+      <ask> <string value="Enter if statement? (Y/n)"/> </ask>
       <if> <!-- an if statement -->
         condition:
           <eq><answer/><literal value="y"/></eq>
 
         branch:
           <branch> <!-- an execution branch -->
-            <goto> x: <literal value="100"/> y: <literal value="50"/> </goto>
-            <looks.switchcostumeto> <literal value="costume"/> </looks.switchcostumeto>
+            <goto> x: <n value="100"/> y: <n value="50"/> </goto>
+            <looks.switchcostumeto> <s value="costume"/> </looks.switchcostumeto>
           </branch>
 
       </if>

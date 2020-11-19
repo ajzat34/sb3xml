@@ -84,6 +84,10 @@ module.exports = {
   'pen-color': 'pen.setPenColorParamTo',
 
   // internal
+  string: 'SB3XML.internal.string',
+  number: 'SB3XML.internal.number',
+  s: 'SB3XML.internal.string',
+  n: 'SB3XML.internal.number',
   literal: 'SB3XML.internal.literal',
   var: 'SB3XML.internal.variable',
   call: 'SB3XML.internal.call',
