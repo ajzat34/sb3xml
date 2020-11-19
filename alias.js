@@ -54,6 +54,7 @@ module.exports = {
   'str-join': 'operator.join',
   'str-index': 'operator.letter_of',
   'str-length': 'operator.length',
+  'str-contains': 'operator.contains',
   random: 'operator.random',
   op: 'operator.mathop',
 
