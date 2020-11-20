@@ -1,9 +1,9 @@
 const fs = require('fs');
 const Project = require('./project');
 
-const data = fs.readFileSync('./test.xml');
 const unit = new Project();
-unit.load(data);
+unit.load(fs.readFileSync('./test_a.xml'), 'test_a.xml');
+unit.load(fs.readFileSync('./test_b.xml'), 'test_b.xml');
 unit.build();
 console.log(unit.render());
 unit.export(__dirname + '/test.sb3');

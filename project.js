@@ -55,10 +55,11 @@ class Project {
   #procedures(arr) {
     for (const procedure of arr) {
       if (this.symbols.has(procedure.symbol)) {
-        if (!(this.symbols.get(procedure.symbol) instanceof Sb3.Block)) throw new Error(`Symbol: ${procedure.symbol} already defined as non-procedure`);
+        if (!(this.symbols.get(procedure.symbol) instanceof Sb3.Branch.Procedure)) throw new Error(`Symbol: ${procedure.symbol} already defined as non-procedure`);
+      } else {
+        const def = this.project.main.procedure(procedure.name, procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
+        this.symbols.set(procedure.symbol, def);
       }
-      const def = this.project.main.procedure(procedure.name, procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
-      this.symbols.set(procedure.symbol, def);
     }
   }
 
@@ -156,11 +157,14 @@ class Project {
     let data = '';
     for (const procedure of arr) {
       const proc = this.symbols.get(procedure.symbol);
-      data += `define ${procedure.symbol}() {\n`
-      for (const block of procedure.blocks) {
-        data += '\t' + this.#render_block(block, 1) + '\n';
-      }
-      data += '}\n\n';
+      data += `define ${procedure.symbol}()`
+      if (procedure.blocks.length){
+        data += ` {\n`
+        for (const block of procedure.blocks) {
+          data += '\t' + this.#render_block(block, 1) + '\n';
+        }
+        data += '}\n\n';
+      } else data += '\n\n'
     }
     return data;
   }
@@ -207,9 +211,8 @@ class Project {
     for (const v of this.var) data += `var ${v}\n`;
     for (const v of this.list) data += `list ${v}\n`;
     for (const v of this.asset) data += `asset ${v}\n`;
-    data += '\n'
     for (const file of this.files) {
-      data += `#file ${file.filename}:\n`;
+      data += `\n#file ${file.filename}:\n`;
       data += this.#render_procedures(file.data.procedures);
       data += this.#render(file.data.blocks);
     }

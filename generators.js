@@ -5,7 +5,8 @@ const Sb3 = require('sb3');
 const Sb3XmlError = require('./error');
 class LinkerError extends Sb3XmlError {};
 
-function getSymbol(project, name) {
+function getSymbol(project, block) {
+  const name = block.attr.symbol
   if (!project.symbols.has(name)) throw new LinkerError(`symbol: ${name} is not defined`);
   return project.symbols.get(name);
 }
@@ -32,7 +33,7 @@ module.exports = {
   const ctx = o.ctx;
   const block = o.block;
   const project = o.project
-  const proc = getSymbol(project, block.attr.symbol);
+  const proc = getSymbol(project, block);
   assertProcedure(proc, 'call', 'symbol');
   return ctx.callProcedure(proc);
 },
@@ -79,10 +80,10 @@ module.exports = {
   return o.ctx.block('control.if_else', nodes[1], nodes[0], nodes[2]);
 },
 
-'SB3XML.internal.variable': function(o) {
+'SB3XML.internal.symbol': function(o) {
   const block = o.block;
   const project = o.project;
-  return getSymbol(project, block.attr.symbol);
+  return getSymbol(project, block);
 },
 
 'control.repeat_until': function(o) {

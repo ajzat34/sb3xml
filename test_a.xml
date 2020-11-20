@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sb3xml>
+<sb3>
+
+  <variables>
+    <var symbol="a"/>
+    <list symbol="list"/>
+  </variables>
+
+  <procedures>
+
+    <proc symbol="test_b"/>
+
+    <proc symbol="circle">
+      <clear/>
+      <pen-up/>
+      <forever>
+        <branch>
+          <goto>
+            <mul><n value="50"/><op op="cos"><mul><timer/><n value="20"/></mul></op></mul>
+            <mul><n value="50"/><op op="sin"><mul><timer/><n value="20"/></mul></op></mul>
+          </goto>
+          <pen-down/>
+        </branch>
+      </forever>
+    </proc>
+
+    <proc symbol="test">
+      <set><var symbol="a"/><n value="10"/></set>
+      <list-clear><var symbol="list"/></list-clear>
+      <repeat>
+        <var symbol="a"/>
+        <branch>
+          <list-push><var symbol="list"/><n value="0"/></list-push>
+        </branch>
+      </repeat>
+      <set>
+        <var symbol="b"/>
+        <op op="sin"><add><random><n value="10"/><n value="20"/></random><var symbol="a"/></add></op>
+      </set>
+
+    </proc>
+
+    <proc symbol="halt">
+      <stop-all/>
+    </proc>
+
+  </procedures>
+
+  <blocks>
+    <call symbol="test"/>
+    <call symbol="test_b"/>
+    <call symbol="circle"/>
+  </blocks>
+</sb3>

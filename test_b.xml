@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sb3xml>
+<sb3>
+
+  <variables>
+    <var symbol="b"/>
+  </variables>
+
+  <procedures>
+    <proc symbol="test_b">
+      <say><s value="text_b.xml was loaded"/></say>
+    </proc>
+  </procedures>
+</sb3>

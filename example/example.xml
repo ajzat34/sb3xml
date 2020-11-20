@@ -32,15 +32,15 @@
     <proc symbol="_main" name="Main" warp="false">
       <!-- show the variable a -->
       <var-show><var symbol="a"/></var-show>
-      <!-- <literal> automaticly guesses the type, you should probably use <number>(<n>) or <string>(<s>) -->
-      <goto> x: <literal value="0"/> y: <number value="0"/> </goto>
+      <!-- <number>(<n>) or <string>(<s>) for literals -->
+      <goto> x: <number value="0"/> y: <number value="0"/> </goto>
       <reset-timer/> <!-- create another block -->
       <ask> <string value="Value for a?"/> </ask>
       <set><var symbol="a"/><answer/></set>
       <ask> <string value="Enter if statement? (Y/n)"/> </ask>
       <if> <!-- an if statement -->
         condition:
-          <eq><answer/><literal value="y"/></eq>
+          <eq><answer/><s value="y"/></eq>
 
         branch:
           <branch> <!-- an execution branch -->

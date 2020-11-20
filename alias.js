@@ -75,7 +75,7 @@ module.exports = {
   'list-length': 'data.lengthoflist',
 
   // pen
-  clearscreen: 'pen.clear',
+  clear: 'pen.clear',
   stamp: 'pen.stamp',
   'pen-down': 'pen.penDown',
   'pen-up': 'pen.penUp',
@@ -91,8 +91,8 @@ module.exports = {
   number: 'SB3XML.internal.number',
   s: 'SB3XML.internal.string',
   n: 'SB3XML.internal.number',
-  literal: 'SB3XML.internal.literal',
-  var: 'SB3XML.internal.variable',
+  var: 'SB3XML.internal.symbol',
+  symbol: 'SB3XML.internal.symbol',
   call: 'SB3XML.internal.call',
   branch: 'SB3XML.internal.branch',
 }
