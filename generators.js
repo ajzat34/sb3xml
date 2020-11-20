@@ -112,6 +112,13 @@ module.exports = {
   return ctx.push(block);
 },
 
+'SB3XML.internal.stop.this': function(o) {
+  const ctx = o.ctx;
+  const block = ctx.blocks.get('control.stop').instance('this-script', 'mutation', [], 'false');
+  return ctx.push(block);
+},
+
+
 'operator.mathop': function(o) {
   const ctx = o.ctx;
   const nodes = o.evalParams();

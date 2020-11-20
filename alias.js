@@ -82,7 +82,7 @@ module.exports = {
   'pen-size': 'pen.setPenSizeTo',
   'pen-color': 'pen.setPenColorParamTo',
 
-  // speical
+  // special
   'stop-all': 'SB3XML.internal.stop.all',
   'stop-this': 'SB3XML.internal.stop.this',
 

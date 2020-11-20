@@ -9,6 +9,7 @@
   <procedures>
     <proc symbol="test_b">
       <say><s value="test_b.xml was loaded"/></say>
+      <stop-this/>
     </proc>
   </procedures>
 </sb3>
