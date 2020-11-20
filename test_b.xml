@@ -8,7 +8,7 @@
 
   <procedures>
     <proc symbol="test_b">
-      <say><s value="text_b.xml was loaded"/></say>
+      <say><s value="test_b.xml was loaded"/></say>
     </proc>
   </procedures>
 </sb3>
