@@ -33,7 +33,7 @@ class Project {
 
   #variables(arr) {
     for (const variable of arr) {
-      if (this.symbols.has(variable.symbol)) throw new Error(`Symbol: ${variable.symbol} already defined`);
+      if (this.symbols.has(variable.symbol)) throw new Error(`symbol ${variable.symbol} already defined`);
       if (variable.type === 'var') {
         this.symbols.set(variable.symbol, this.project.main.variable(variable.name));
         this.var.push(variable.symbol);
@@ -55,7 +55,7 @@ class Project {
   #procedures(arr) {
     for (const procedure of arr) {
       if (this.symbols.has(procedure.symbol)) {
-        if (!(this.symbols.get(procedure.symbol) instanceof Sb3.Branch.Procedure)) throw new Error(`Symbol: ${procedure.symbol} already defined as non-procedure`);
+        if (!(this.symbols.get(procedure.symbol) instanceof Sb3.Branch.Procedure)) throw new Error(`symbol ${procedure.symbol} already defined as non-procedure`);
       } else {
         const def = this.project.main.procedure(procedure.name, procedure.attr.warp? procedure.attr.warp.trim()==='true':false);
         this.symbols.set(procedure.symbol, def);

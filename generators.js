@@ -7,7 +7,7 @@ class LinkerError extends Sb3XmlError {};
 
 function getSymbol(project, block) {
   const name = block.attr.symbol
-  if (!project.symbols.has(name)) throw new LinkerError(`symbol: ${name} is not defined`);
+  if (!project.symbols.has(name)) throw new LinkerError(`symbol ${name} is not defined`);
   return project.symbols.get(name);
 }
 
