@@ -222,9 +222,10 @@ class Project {
   /**
   * write an sb3 file
   * @param {string} file path to write to
+  * @return {promise}
   */
   export(file) {
-    this.project.export(file)
+    return this.project.export(file)
   }
 }
 
