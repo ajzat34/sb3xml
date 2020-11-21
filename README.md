@@ -10,7 +10,10 @@ const Project = require('sb3xml');
 const unit = new Project();
 
 // load a file
-unit.file(fs.readFileSync('main.xml'), 'Main');
+unit.load(fs.readFileSync('main.xml'), 'Main');
+
+// build the project
+unit.build();
 
 // export the sb3
 unit.export(__dirname + 'out.sb3');
