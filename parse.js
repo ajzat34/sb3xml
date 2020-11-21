@@ -120,7 +120,6 @@ function parseTopLevel(node) {
 
 // parse a document
 function parseDoc(doc) {
-  if (doc.doctype.trim() !== 'sb3xml') console.warn('document is not sb3xml');
   if (doc.name.trim() !== 'sb3') throw new Sb3XmlError(`Document must contain sb3 node`);
   return doc.children.map(parseTopLevel).filter(d=>d);
 }

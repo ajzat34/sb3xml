@@ -79,8 +79,8 @@ module.exports = {
   stamp: 'pen.stamp',
   'pen-down': 'pen.penDown',
   'pen-up': 'pen.penUp',
-  'pen-size': 'pen.setPenSizeTo',
-  'pen-color': 'pen.setPenColorParamTo',
+  'set-pen-size': 'pen.setPenSizeTo',
+  'set-pen-color': 'pen.setPenColorParamTo',
 
   // special
   'stop-all': 'SB3XML.internal.stop.all',
